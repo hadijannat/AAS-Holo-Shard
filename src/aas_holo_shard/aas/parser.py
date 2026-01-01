@@ -3,23 +3,23 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Tuple
+from typing import Any, Tuple, Union
 
 from aas_holo_shard.core import shamir
 
 
-def read_aasx_bytes(path: str | Path) -> bytes:
+def read_aasx_bytes(path: Union[str, Path]) -> bytes:
     """Read an AASX package as raw bytes."""
     return Path(path).read_bytes()
 
 
-def write_aasx_bytes(path: str | Path, payload: bytes) -> None:
+def write_aasx_bytes(path: Union[str, Path], payload: bytes) -> None:
     """Write raw bytes to an AASX package path."""
     Path(path).write_bytes(payload)
 
 
 def encrypt_aasx_path(
-    input_path: str | Path,
+    input_path: Union[str, Path],
     *,
     threshold: int,
     total: int,
@@ -47,7 +47,7 @@ def _require_basyx() -> Tuple[Any, Any, Any, Any]:
         ) from exc
 
 
-def load_aasx_basyx(path: str | Path):
+def load_aasx_basyx(path: Union[str, Path]):
     """Load an AASX package into BaSyx object and file stores."""
     AASXReader, _, DictObjectStore, DictSupplementaryFileContainer = _require_basyx()
 

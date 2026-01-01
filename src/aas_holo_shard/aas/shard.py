@@ -7,7 +7,7 @@ import json
 import secrets
 import sys
 from pathlib import Path
-from typing import Any, Iterable, List, Sequence, Tuple
+from typing import Any, Iterable, List, Optional, Sequence, Tuple, Union
 
 PRIME = 2**521 - 1
 SHARD_PREFIX = "SHARD_V1"
@@ -87,7 +87,7 @@ def int_to_str(value: int) -> str:
     return value.to_bytes(length, "big").decode("utf-8")
 
 
-def find_element(aas_json: Any, id_short: str) -> dict | None:
+def find_element(aas_json: Any, id_short: str) -> Optional[dict]:
     if isinstance(aas_json, dict):
         if aas_json.get("idShort") == id_short and "value" in aas_json:
             return aas_json
@@ -103,7 +103,7 @@ def find_element(aas_json: Any, id_short: str) -> dict | None:
     return None
 
 
-def _parse_shard_value(raw_value: str) -> Shard | None:
+def _parse_shard_value(raw_value: str) -> Optional[Shard]:
     if not raw_value.startswith(f"{SHARD_PREFIX}:"):
         return None
     parts = raw_value.split(":")
@@ -123,7 +123,12 @@ def _inject_shard_value(element: dict, shard: Shard) -> None:
     ]
 
 
-def split_aas(file_path: str | Path, target_id: str, n: int, k: int) -> List[Path]:
+def split_aas(
+    file_path: Union[str, Path],
+    target_id: str,
+    n: int,
+    k: int,
+) -> List[Path]:
     source_path = Path(file_path)
     original_aas = json.loads(source_path.read_text())
 
@@ -153,7 +158,11 @@ def split_aas(file_path: str | Path, target_id: str, n: int, k: int) -> List[Pat
     return output_paths
 
 
-def combine_aas(files: Iterable[str | Path], target_id: str, output: str | Path) -> str:
+def combine_aas(
+    files: Iterable[Union[str, Path]],
+    target_id: str,
+    output: Union[str, Path],
+) -> str:
     raw_shards: List[Shard] = []
     files_list = [Path(path) for path in files]
 
@@ -211,7 +220,7 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
 

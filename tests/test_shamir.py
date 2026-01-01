@@ -34,3 +34,38 @@ def test_invalid_share_length() -> None:
     bad_shares = [(shares[0][0], shares[0][1][:8])]
     with pytest.raises(shamir.CryptoError):
         shamir.reconstruct_and_decrypt(encrypted, bad_shares)
+
+
+def test_threshold_bounds() -> None:
+    with pytest.raises(shamir.CryptoError):
+        shamir.encrypt_and_split(b"hello", threshold=1, total=256)
+
+
+def test_split_key_invalid_length() -> None:
+    with pytest.raises(shamir.CryptoError):
+        shamir._split_key(b"short", threshold=2, total=3)
+
+
+def test_combine_key_invalid_inputs() -> None:
+    with pytest.raises(shamir.CryptoError):
+        shamir._combine_key([])
+    with pytest.raises(shamir.CryptoError):
+        shamir._combine_key([("1", b"x" * 32)])  # type: ignore[list-item]
+    with pytest.raises(shamir.CryptoError):
+        shamir._combine_key([(1, b"x" * 8)])
+
+
+def test_pack_and_unpack_errors() -> None:
+    with pytest.raises(shamir.CryptoError):
+        shamir._pack_encrypted(b"bad", b"t" * 16, b"data")
+    with pytest.raises(shamir.CryptoError):
+        shamir._pack_encrypted(b"n" * 16, b"bad", b"data")
+    with pytest.raises(shamir.CryptoError):
+        shamir._unpack_encrypted(b"bad")
+    with pytest.raises(shamir.CryptoError):
+        shamir._unpack_encrypted(b"NOPE" + b"0" * 32)
+
+
+def test_encrypted_bundle_to_dict() -> None:
+    bundle = shamir.EncryptedBundle(b"payload", [(1, b"x" * 32)])
+    assert bundle.to_dict()["encrypted"] == b"payload"
