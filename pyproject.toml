@@ -33,9 +33,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Topic :: Security :: Cryptography"
 ]
-dependencies = [
-  "pycryptodome>=3.19"
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
@@ -47,7 +45,17 @@ dev = [
 test = [
   "pytest>=8.2.0",
   "pytest-cov>=5.0.0",
-  "hypothesis>=6.100.0"
+  "hypothesis>=6.100.0",
+  "pycryptodome>=3.19"
+]
+crypto = [
+  "pycryptodome>=3.19"
+]
+ipfs = [
+  "ipfshttpclient>=0.8.0"
+]
+basyx = [
+  "basyx-python-sdk>=1.0.0"
 ]
 
 [tool.black]

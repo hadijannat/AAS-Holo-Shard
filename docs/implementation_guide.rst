@@ -4,10 +4,12 @@ Implementation Guide
 Overview
 --------
 
-AAS-Holo-Shard secures AASX packages at rest by encrypting the file with
-AES-256-GCM and splitting only the encryption key using Shamir's Secret
-Sharing (SSS). The encrypted payload can be stored anywhere, while shares
-are distributed across independent custodians.
+AAS-Holo-Shard supports two modes:
+
+1. Pure-Python AAS JSON sharding: shard a single sensitive Property value and
+   embed each shard into a valid AAS JSON file.
+2. AASX encryption: encrypt the full package with AES-256-GCM, then split only
+   the 32-byte key using Shamir's Secret Sharing (SSS).
 
 Security gap addressed
 ----------------------
@@ -39,15 +41,19 @@ Use cases to highlight in a portfolio
 Architecture decisions
 ----------------------
 
-1. Encrypt-then-share
+1. AAS JSON sharding
+   - Target a specific `idShort` and replace its value with `SHARD_V1:x:y`.
+   - Each shard file remains a valid AAS JSON document.
+
+2. Encrypt-then-share (AASX)
    - Encrypt full AASX bytes with AES-256-GCM.
    - Split only the 32-byte AES key (faster, safer, scalable).
 
-2. Dual 16-byte SSS split
+3. Dual 16-byte SSS split (AASX)
    - PyCryptodome's SSS implementation operates on 16-byte secrets.
    - The AES key is split into two 16-byte halves and rejoined on combine.
 
-3. Share custody
+4. Share custody
    - Shares are stored in distinct administrative or geographic domains
      (e.g., OEM + suppliers + auditor).
 
@@ -77,10 +83,10 @@ Threat model notes
 Implementation roadmap
 ----------------------
 
-1. Core crypto module (`src/aas_holo_shard/core/shamir.py`).
-2. AASX IO helpers (`src/aas_holo_shard/aas/parser.py`).
-3. Storage adapters (`src/aas_holo_shard/storage/ipfs.py`).
-4. CLI and automation (future): encrypt, split, store, reconstruct.
+1. Pure-Python sharding (`src/aas_holo_shard/aas/shard.py` + `aas_shard.py`).
+2. Core crypto module (`src/aas_holo_shard/core/shamir.py`).
+3. AASX IO helpers (`src/aas_holo_shard/aas/parser.py`).
+4. Storage adapters (`src/aas_holo_shard/storage/ipfs.py`).
 
 Operational guidance
 --------------------

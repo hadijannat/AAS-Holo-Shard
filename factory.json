@@ -1,0 +1,21 @@
+{
+  "assetAdministrationShells": [
+    {
+      "id": "urn:uuid:fac-1",
+      "idShort": "SmartFactory"
+    }
+  ],
+  "submodels": [
+    {
+      "idShort": "ProductionParams",
+      "submodelElements": [
+        {
+          "idShort": "MasterKey",
+          "modelType": "Property",
+          "valueType": "xs:string",
+          "value": "SuperSecretCocaColaRecipe_2024"
+        }
+      ]
+    }
+  ]
+}
