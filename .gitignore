@@ -1,0 +1,32 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.dist/
+.build/
+.coverage
+.coverage.*
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.venv/
+.env
+
+# packaging
+build/
+dist/
+
+# agent notes (local only)
+AGENTS.md
+agent.md
+skills/
+
+# OS
+.DS_Store
+
+# docs
+/docs/_build/
