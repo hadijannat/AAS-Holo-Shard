@@ -6,9 +6,9 @@ from dataclasses import dataclass
 from typing import Iterable, List, Tuple
 
 try:
-    from Crypto.Cipher import AES
-    from Crypto.Protocol.SecretSharing import Shamir
-    from Crypto.Random import get_random_bytes
+    from Crypto.Cipher import AES  # nosec B413 - pycryptodome import
+    from Crypto.Protocol.SecretSharing import Shamir  # nosec B413 - pycryptodome import
+    from Crypto.Random import get_random_bytes  # nosec B413 - pycryptodome import
 except Exception as exc:  # pragma: no cover - handled at import time
     raise RuntimeError(
         "pycryptodome is required for aas_holo_shard.core.shamir"
