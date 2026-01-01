@@ -1,9 +1,8 @@
 # AAS-Holo-Shard
 
-[![PyPI](https://img.shields.io/pypi/v/aas-holo-shard.svg)](https://pypi.org/project/aas-holo-shard/)
-[![Python](https://img.shields.io/pypi/pyversions/aas-holo-shard.svg)](https://pypi.org/project/aas-holo-shard/)
-[![CI](https://github.com/username/aas-holo-shard/actions/workflows/ci.yml/badge.svg)](https://github.com/username/aas-holo-shard/actions)
-[![codecov](https://codecov.io/gh/username/aas-holo-shard/branch/main/graph/badge.svg)](https://codecov.io/gh/username/aas-holo-shard)
+[![Release](https://img.shields.io/github/v/release/hadijannat/AAS-Holo-Shard?include_prereleases&sort=semver)](https://github.com/hadijannat/AAS-Holo-Shard/releases)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
+[![CI](https://github.com/hadijannat/AAS-Holo-Shard/actions/workflows/ci.yml/badge.svg)](https://github.com/hadijannat/AAS-Holo-Shard/actions)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
