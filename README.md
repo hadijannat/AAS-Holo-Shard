@@ -1,6 +1,6 @@
 # AAS-Holo-Shard
 
-[![Release](https://img.shields.io/github/v/release/hadijannat/AAS-Holo-Shard?include_prereleases&sort=semver)](https://github.com/hadijannat/AAS-Holo-Shard/releases)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/hadijannat/AAS-Holo-Shard)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![CI](https://github.com/hadijannat/AAS-Holo-Shard/actions/workflows/ci.yml/badge.svg)](https://github.com/hadijannat/AAS-Holo-Shard/actions)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
